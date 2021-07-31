@@ -1,8 +1,9 @@
 {
     "version": 3,
-    "mappings": "AAAA,AAAA,CAAC,CAAA;EACG,UAAU,EAAE,UAAU;EACtB,OAAO,EAAE,CAAC;EACV,MAAM,EAAE,CAAC;EACT,eAAe,EAAE,IAAI;EACrB,UAAU,EAAE,IAAI;CACnB;;AAED,AAAA,GAAG,CAAC;EACA,MAAM,EAAE,IAAI;EACZ,KAAK,EAAE,MAAM;EACb,UAAU,EAAE,OAChB;CAAC",
+    "mappings": "AAEA,AAAA,CAAC,CAAA;EACG,UAAU,EAAE,UAAU;EACtB,OAAO,EAAE,CAAC;EACV,MAAM,EAAE,CAAC;EACT,eAAe,EAAE,IAAI;EACrB,UAAU,EAAE,IAAI;CACnB;;AAED,AAAA,GAAG,CAAC;EACA,MAAM,EAAE,IAAI;EACZ,KAAK,EAAE,MAAM;EACb,UAAU,ECbP,OAAO;CDcb",
     "sources": [
-        "datawarehouse.scss"
+        "datawarehouse.scss",
+        "_colors.scss"
     ],
     "names": [],
     "file": "datawarehouse.css"

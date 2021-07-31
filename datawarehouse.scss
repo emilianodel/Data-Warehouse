@@ -1,3 +1,5 @@
+@import "_colors.scss";
+
 *{
     box-sizing: border-box;   
     padding: 0;
@@ -9,5 +11,5 @@
 nav {
     height: 64px;
     width: 1366px;
-    background: #1D72C2
+    background: $blue;
 }

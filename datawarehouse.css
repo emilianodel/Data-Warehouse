@@ -6,4 +6,8 @@
   text-decoration: none;
   list-style: none;
 }
+
+body {
+  overscroll-behavior-block: 23;
+}
 /*# sourceMappingURL=datawarehouse.css.map */

@@ -11,5 +11,44 @@ nav {
   height: 64px;
   width: 1366px;
   background: #1D72C2;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+nav p {
+  margin-left: 30px;
+  font-size: 25px;
+  font-family: "Open Sans";
+  font-weight: bold;
+  color: white;
+}
+
+nav li {
+  display: inline-block;
+  overflow: hidden;
+  text-align: center;
+  width: 130px;
+  border-bottom: solid 1px white;
+}
+
+nav li a {
+  font-family: "Open Sans";
+  color: white;
+  margin-right: auto;
+}
+
+nav li a:hover {
+  font-weight: bold;
 }
 /*# sourceMappingURL=datawarehouse.css.map */

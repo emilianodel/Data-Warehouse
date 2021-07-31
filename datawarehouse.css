@@ -36,10 +36,8 @@ nav p {
 
 nav li {
   display: inline-block;
-  overflow: hidden;
   text-align: center;
   width: 130px;
-  border-bottom: solid 1px white;
 }
 
 nav li a {
@@ -50,5 +48,10 @@ nav li a {
 
 nav li a:hover {
   font-weight: bold;
+  padding-top: 20px;
+  margin: auto;
+  padding-bottom: 18px;
+  width: 41px;
+  border-bottom: 2px solid #FFFFFF;
 }
 /*# sourceMappingURL=datawarehouse.css.map */

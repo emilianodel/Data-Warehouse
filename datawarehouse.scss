@@ -27,22 +27,26 @@ nav {
 
     li{
         display: inline-block; 
-        overflow: hidden;
         text-align: center;
         width: 130px;
-       
-         
+        
         a{
             font-family: $Sans;
             color: white;
             margin-right: auto;
             
-            &:hover{ 
+            &:hover{   
                 font-weight: bold;
-               
+                padding-top: 20px;
+                margin: auto;
+                padding-bottom: 18px;
+                width: 41px;
+                border-bottom: 2px solid #FFFFFF;
             }
-        }
-        border-bottom: solid 1px white; 
+       }
+       
+   
+        
     }
       
     

@@ -1,11 +1,11 @@
 
 document.getElementById("login").addEventListener("click", login);
 function login() {
-  const email = document.getElementById("email");
-  const pass = document.getElementById("password");
+  const email = document.getElementById("email").value;
+  const pass = document.getElementById("pass").value;
   const login = { email: email, pass: pass };
-  const url = `http://localhost:3000/users/login`;
-
+  const url = "http://localhost:3000/users/login";
+  console.log(email);
   fetch(url, {
     method: "POST",
     body: JSON.stringify(login),

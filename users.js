@@ -1,14 +1,24 @@
 var express = require('express');
 var server = express();
+var cors = require('cors');
 const parser = require('body-parser');
 const Sequelize = require ('sequelize');
 const path = `mysql://root@localhost:3306/data_warehouse`;
 const myDataBase = new Sequelize(path);
 server.use(parser.json());
 server.use(express.json());
+server.use(cors());
 
 const jwt = require('jsonwebtoken');
 const jwtPassword = "Ac4m1C4_D4t4_War3H0us3!"
+
+server.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    next();
+});
+
 
 myDataBase.authenticate().then(() =>{ 
     console.log('Conectado')
@@ -43,7 +53,7 @@ const verifyJWT = (req, res, next) => {
     
 }
 
-server.post('/login', async (req, res) => {
+server.post('/users/login', async (req, res) => {
     const {email, pass} = req.body
 
     try {

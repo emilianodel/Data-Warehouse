@@ -1,11 +1,20 @@
+/*const { response } = require("express");
+const { Json } = require("sequelize/types/lib/utils");*/
 
-document.getElementById("login").addEventListener("click", login);
+//const { json } = require("body-parser");
+const form = document.querySelector(".login-form")
+const login_one = document.getElementById("login")
+login_one.addEventListener('click', login)
+
 function login() {
+  
+  
   const email = document.getElementById("email").value;
   const pass = document.getElementById("pass").value;
   const login = { email: email, pass: pass };
   const url = "http://localhost:3000/users/login";
-  console.log(email);
+  
+  
   fetch(url, {
     method: "POST",
     body: JSON.stringify(login),
@@ -15,15 +24,16 @@ function login() {
   })
     .then((res) => res.json())
     .then((json) => {
-      console.log(json);
-      if (json.msj == "Error") {
+        console.log(json);
+      if (json.message == "Usuario o contrasena incorrecta") {
         alert("Error en login");
       } else {
-        console.log(json);
+        
         localStorage.setItem("token", JSON.stringify(json.token));
-        localStorage.setItem("admin", JSON.stringify(json.admin));
-
+        window.location.href = 'index.html'
       }
     })
     .catch((error) => console.error("Error:", error));
 }
+
+

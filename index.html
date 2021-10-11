@@ -7,22 +7,65 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="datawarehouse.css">
+    <link rel="stylesheet" href="usuarios.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Data Warehouse</title>
 </head>
 <body>
+    <div id="root"></div>   
     <header>
         <nav>
-            <p>LOGO</p>
+            <p class="logo">LOGO</p>
             <ul>
                 <li><a href="#">Contactos</a></li>
                 <li><a href="#">Compañías</a></li>
-                <li><a href="#">Usuarios</a></li>
+                <li id="users"><a href="#">Usuarios</a></li>
                 <li><a href="#">Región/Ciudad</a></li>
             </ul>
         </nav>
     </header>
-    <div></div>
+    <div id="usuarios">
+        <div class="form_wrapper">
+            <div class="form_container">
+              <div class="title_container">
+                <h2>Crear Usuario</h2>
+              </div>
+              <div class="row clearfix">
+                <div class="">
+                  <form class ='table_users'>
+                    <div class="input_field"> <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
+                      <input type="email" name="email" placeholder="Email" required />
+                    </div>
+                    <div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock"></i></span>
+                      <input type="password" name="pass" placeholder="Contraseña" required />
+                    </div>
+                    <div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock"></i></span>
+                      <input type="password" name="pass" placeholder="Repetir Contraseña" required />
+                    </div>
+                    <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
+                      <input type="perfil" name="perfil" placeholder="Perfil" />
+                    </div>
+                    <div class="row clearfix">
+                      <div class="col_half">
+                        <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
+                          <input type="text" name="first_name" placeholder="Nombre" />
+                        </div>
+                      </div>
+                      <div class="col_half">
+                        <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
+                          <input type="text" name="last_name" placeholder="Apellido" required />
+                        </div>
+                      </div>
+                  </form>
+                </div>
+                <button class="CrearBtn">Crear</button>
+              </div>
+            </div>
+          </div>
+    </div>
     <div></div>
     
 </body>
+<script src="index.js"></script>
+<script src="createuser.js"></script>
 </html>

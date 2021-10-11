@@ -32,6 +32,7 @@ nav p {
   font-family: "Open Sans";
   font-weight: bold;
   color: white;
+  cursor: pointer;
 }
 
 nav li {

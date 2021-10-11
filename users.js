@@ -12,12 +12,12 @@ server.use(cors());
 const jwt = require('jsonwebtoken');
 const jwtPassword = "Ac4m1C4_D4t4_War3H0us3!"
 
-server.use((req, res, next) => {
+/*server.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
     next();
-});
+});*/
 
 
 myDataBase.authenticate().then(() =>{ 
@@ -79,4 +79,58 @@ server.post('/users/login', async (req, res) => {
     } catch (err) {
         console.log(err)
     }
+})
+
+
+function validateUser(req, res, next) {
+    const {first_name, last_name, email, pass} = req.body;
+
+    if (!first_name || !last_name|| !email || !pass){
+        return res.status(400)
+            .send({states: 'Error', message: 'Datos incompletos, es necesario completar todos los campos'})
+    }
+
+    return next();
+}
+
+
+const ifEmailExist = async (req, res, next) => {
+    const {email} = req.body
+
+    try {
+        const ifUserExist = await myDataBase.query('SELECT * FROM users WHERE email =?', {
+            replacements: [email],
+            type: myDataBase.QueryTypes.SELECT
+        })
+        if(ifUserExist.length >= '1') {
+            res.status(406).json({
+                message: 'Usuario registrado'
+            })
+
+        } else {
+            next();
+        }
+    }catch (err) {
+        res.status(400).json ({
+            message: 'Error'
+        })
+    }
+}
+
+
+
+server.post('/users', async (req, res) => {
+
+    const {first_name, last_name, email, pass} = req.body;
+
+    const users =  await myDataBase.query('INSERT INTO users (first_name, last_name, email, pass) VALUES (?, ?, ?, ?)',
+        {
+        replacements: [first_name, last_name, email, pass],
+        type: myDataBase.QueryTypes.INSERT,
+        }
+    )
+    
+    users.push(req.body);
+    res.status(201).json({status: "Usuario creado exitosamente"});
+    console.log(users);
 })

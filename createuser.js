@@ -18,9 +18,9 @@ createBtn.addEventListener('click', async ()  => {
       }
     }).then ((response) => response.json())
     .then((json) => {
-      let par = document.createElement('p')
+      /*let par = document.createElement('p')
       par.innerHTML = json.message;
-      createBtn.after(par)
+      createBtn.after(par)*/
     })
     
 })

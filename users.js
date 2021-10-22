@@ -119,7 +119,7 @@ const ifEmailExist = async (req, res, next) => {
 
 
 
-server.post('/users', async (req, res) => {
+server.post('/users', ifEmailExist, validateUser, async (req, res) => {
 
     const {first_name, last_name, email, pass} = req.body;
 

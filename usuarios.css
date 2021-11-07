@@ -101,6 +101,19 @@ body {
   padding-top: 10px;
 }
 
+.form_wrapper input {
+  /*&[type="checkbox"], &[type="radio"] {
+      border: 0;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }*/
+}
+
 .form_wrapper input[type="text"], .form_wrapper input[type="email"], .form_wrapper input[type="password"], .form_wrapper input[type="perfil"] {
   width: 100%;
   padding: 8px 10px 9px 35px;
@@ -145,17 +158,6 @@ body {
 
 .form_wrapper input[type="submit"]:focus {
   background: #1860a3;
-}
-
-.form_wrapper input[type="checkbox"], .form_wrapper input[type="radio"] {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
 }
 
 .form_container .row .col_half.last {
@@ -423,5 +425,10 @@ body {
     transform: translate3d(0, 0, 0);
     opacity: 1;
   }
+}
+
+#admin label {
+  font-size: 16px;
+  padding-left: 10px;
 }
 /*# sourceMappingURL=usuarios.css.map */

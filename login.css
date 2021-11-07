@@ -128,4 +128,8 @@ nav p {
 .container .info span .fa {
   color: #EF3B3A;
 }
+
+#companiesList {
+  color: red;
+}
 /*# sourceMappingURL=login.css.map */

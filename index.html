@@ -18,7 +18,7 @@
             <p class="logo">LOGO</p>
             <ul>
                 <li><a href="#">Contactos</a></li>
-                <li><a href="#">Compañías</a></li>
+                <li id="companias"><a href="#">Compañías</a></li>
                 <li id="users"><a href="#">Usuarios</a></li>
                 <li><a href="#">Región/Ciudad</a></li>
             </ul>
@@ -40,10 +40,10 @@
                       <input type="password" name="pass" placeholder="Contraseña" required />
                     </div>
                     <div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock"></i></span>
-                      <input type="password" name="pass" placeholder="Repetir Contraseña" required />
+                      <input type="password" name="passas" placeholder="Repetir Contraseña" required />
                     </div>
                     <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
-                      <input type="perfil" name="perfil" placeholder="Perfil" />
+                      <input type="perfil" id='admin' name="isAdmin" placeholder="¿Es administrador? Por favor responder" />                  
                     </div>
                     <div class="row clearfix">
                       <div class="col_half">
@@ -55,17 +55,23 @@
                         <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
                           <input type="text" name="last_name" placeholder="Apellido" required />
                         </div>
-                      </div>
+                    </div>
+                    <!--<div id = "admin"> <span><i aria-hidden="true" ></i></span>
+                        <input type="checkbox" name="isAdmin" id="isAdmin"/> 
+                        <label for="isAdmin">    ¿Es administrador?</label>-->                 
+                    </div>
                   </form>
                 </div>
                 <button class="CrearBtn">Crear</button>
               </div>
             </div>
           </div>
-    </div>
-    <div></div>
+        </div>
+  </div>
+  <div id="companies" class="users-list"></div>
     
 </body>
 <script src="index.js"></script>
 <script src="createuser.js"></script>
+<script src="companies.js"></script>
 </html>

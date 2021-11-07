@@ -1,7 +1,4 @@
-/*const { response } = require("express");
-const { Json } = require("sequelize/types/lib/utils");*/
 
-//const { json } = require("body-parser");
 const form = document.querySelector(".login-form")
 const login_one = document.getElementById("login")
 login_one.addEventListener('click', login)
@@ -30,6 +27,7 @@ function login() {
       } else {
         
         localStorage.setItem("token", JSON.stringify(json.token));
+        localStorage.setItem("isAdmin", JSON.stringify(json.isAdmin));
         window.location.href = 'index.html'
       }
     })

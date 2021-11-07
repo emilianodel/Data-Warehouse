@@ -143,7 +143,7 @@ body {
 			background: darken($yellow,7%);
 		}
 	}    
-    &[type="checkbox"], &[type="radio"] {
+    /*&[type="checkbox"], &[type="radio"] {
       border: 0;
       clip: rect(0 0 0 0);
       height: 1px;
@@ -152,7 +152,7 @@ body {
       padding: 0;
       position: absolute;
       width: 1px;
-    }
+    }*/
   }
 }
 .form_container {
@@ -339,4 +339,12 @@ body {
 	50% { -webkit-transform: translate3d(0,-6px,0); transform: translate3d(0,-6px,0); }
 	75% { -webkit-transform: translate3d(0,2px,0); transform: translate3d(0,2px,0); }
 	100% { -webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0); opacity: 1; }
+}
+
+#admin{
+  label {
+    font-size: 16px;
+    padding-left: 10px;
+  }
+  
 }

@@ -10,20 +10,20 @@ createBtn.addEventListener('click', async ()  => {
         body[nombre] = valor
        
     }
-
-     
+    
     if ( body.isAdmin == "si") {
       body.isAdmin = 1;
     } else {
       body.isAdmin = 0;
+     
     }
-
-    console.log(body)
-    fetch('http://localhost:3000/users', {
+    
+    if(body.pass == body.repeatpass){
+      fetch('http://localhost:3000/users', {
       method: 'POST',
       body: JSON.stringify(body), 
       headers: myHeaders
-      
+
     }).then ((response) => response.json())
     .then((json) => {
      
@@ -35,5 +35,11 @@ createBtn.addEventListener('click', async ()  => {
       }
     })
     .catch((error) => console.error("Error:", error));
+
+
+    } else {
+      alert("Las contraseñas no coinciden");
+    }
+    
 })
    

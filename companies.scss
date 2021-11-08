@@ -1,0 +1,56 @@
+@import "_colors.scss";
+
+*{
+    box-sizing: border-box;   
+    padding: 0;
+    margin: 0;     
+    text-decoration: none;
+    list-style: none;
+    font-family: $Sans;
+}
+
+
+$yellow:#1D72C2;
+$black:#000000;
+$grey:#cccccc;
+
+#companies{
+    width: 1366px;
+    height: 1000px;
+    background-color: white;
+}
+#div_title {
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 200px 0px 200px;
+
+    button{
+        width: 100px;
+        height: 55px;
+        font-family: $Sans;
+        font-size: 14px;
+        color: white;
+        background-color: #1D72C2;
+        outline: none;
+        cursor: pointer;
+        border: 1px solid white;
+    }
+   
+}
+
+table {
+    width: 1000px ;
+    border-width:2px;
+    border-style:solid;
+    border-color:black;
+    margin-top: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    tbody {
+        th {
+        font-weight: 400;
+        } 
+    }
+}

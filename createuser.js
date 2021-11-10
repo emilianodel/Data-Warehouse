@@ -11,11 +11,10 @@ createBtn.addEventListener('click', async ()  => {
        
     }
     
-    if ( body.isAdmin == "si") {
+    if (body.isAdmin == "si") {
       body.isAdmin = 1;
     } else {
       body.isAdmin = 0;
-     
     }
     
     if(body.pass == body.repeatpass){

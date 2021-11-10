@@ -52,4 +52,15 @@ table {
 table tbody th {
   font-weight: 400;
 }
+
+table .edit {
+  display: inline-block;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+table .delete {
+  display: inline-block;
+  padding-left: 10px;
+}
 /*# sourceMappingURL=companies.css.map */

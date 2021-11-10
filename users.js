@@ -76,60 +76,7 @@ const verifyisAdmin =  (req, res, next) => {
         } 
     } catch {
         res.status(401).json({message:"Usuario no autorizado"});
-    }
-    /*try {
-        //let token = req.headers.authorization;
-        let tokens = req.headers.authorization.split(" ")[1];
-        let decodeToken = jwt.verify(tokens, jwtPassword);
-        if(decodeToken) {
-            req.token = decodeToken
-            /*console.log(decode)
-    
-            let isAdmin = decode.isAdmin
-            console.log(isAdmin)
-            if(req.token.isAdmin == true) {
-                res.status(401).send({error: "Usuario no autorizado"})
-            } else {
-                return next ();
-            }
-            
-        }*/
-    /*const {isAdmin} = req.userInfo;
-    try {
-        if(isAdmin = '0') {
-            throw new Error
-        }else{
-            next();
-        }
-        
-
-    }    catch {
-        res.status(401).json({message:"Usuario no autorizado"});
-    }*/
-
-    /*try {
-        let token = req.headers.authorization.split(" ")[1];
-        let decodeToken = jwt.verify(token, jwtPassword);
-        console.log(decodeToken)
-         if(decodeToken) {
-            req.token = decodeToken;
-            
-            if ( req.decodeToken.isAdmin == true) {
-            return next();
-          } else {
-            res.status(401).json({ msj: "Solo acceso Administrador" });
-          }
-        }
-        /*f (token) {
-            req.token = decodeToken;
-          
-        }
-        
-      } catch (error) {
-        res.status(401).json({ msj: "Error al validar usuario" });
-      
-      }*/
-     
+    }   
 }
 
 
@@ -203,12 +150,6 @@ server.post('/users/login', async (req, res) => {
 })
 
 
-
-
-
-
-
-
 server.post('/users', ifEmailExist, validateUser, verifyisAdmin,async (req, res) => {
 
     const {first_name, last_name, email, pass, isAdmin} = req.body;
@@ -227,7 +168,7 @@ server.post('/users', ifEmailExist, validateUser, verifyisAdmin,async (req, res)
 
 server.get('/companies', verifyJWT, async (req, res) => {
     try {
-        const results = await myDataBase.query('SELECT companies.name,companies.address,companies.email,companies.phone,cities.city_name FROM `companies` INNER JOIN cities ON companies.id_city = cities.id' , {type: myDataBase.QueryTypes.SELECT});
+        const results = await myDataBase.query('SELECT companies.id_company, companies.name,companies.address,companies.email,companies.phone,cities.city_name FROM `companies` INNER JOIN cities ON companies.id_city = cities.id' , {type: myDataBase.QueryTypes.SELECT});
         if(results){
             res.status(200).json(results);
             console.log(results);
@@ -240,3 +181,26 @@ server.get('/companies', verifyJWT, async (req, res) => {
         })
     }
 });
+
+server.delete('/companies/:id_company', verifyJWT, async (req, res) => {
+
+    const {id_company}= req.params;
+
+    try{
+        const companies_id_delete =  await myDataBase.query('DELETE FROM companies WHERE id_company = ?',
+        {
+        replacements: [id_company],
+        })
+       
+        if(companies_id_delete) {
+            res.status(201).json({status: "Compañia eliminado exitosamente"});
+        } else {
+            throw new Error
+        }
+    }catch(err) {
+        res.status(400).json ({
+            message: 'Error'
+            })
+    }   
+ 
+})

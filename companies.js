@@ -30,7 +30,7 @@ async function showCompanies() {
 }
 
 function showingCompanies (data) {
-    
+    console.log(data)
     companiesList.innerHTML = ''
     let divtitle = document.createElement('div')
     companiesList.appendChild(divtitle)
@@ -82,28 +82,55 @@ function showingCompanies (data) {
         let email = document.createElement("th");
         let city = document.createElement("th");
         let options = document.createElement("th");
-        let editar = document.createElement("h3");
-        let eliminar = document.createElement("h3");
+        let edit = document.createElement("h3");
+        let deletecompany = document.createElement("img");
         companieTableInfo.appendChild(trCompanie);
         trCompanie.appendChild(name);
         trCompanie.appendChild(address);
         trCompanie.appendChild(email);
         trCompanie.appendChild(city);
         trCompanie.appendChild(options);
-        options.appendChild(editar);
-        options.appendChild(eliminar);
-        editar.setAttribute("class","editar");
-        editar.style.cursor="pointer";
-        eliminar.setAttribute("class","eliminar");
-        eliminar.style.cursor="pointer";
+        options.appendChild(edit);
+        options.appendChild(deletecompany);
+        edit.setAttribute("class","edit");
+        edit.style.cursor="pointer";
+        deletecompany.setAttribute("class","delete");
+        deletecompany.style.cursor="pointer";
 
+        let id_company = info.id_company;
         name.innerHTML = info.name;
         address.innerHTML = info.address;
         email.innerHTML = info.email;
         city.innerHTML = info.city_name;
+        edit.innerHTML = 'Editar'
+        deletecompany.setAttribute('src', '/images/close.svg')
+        deletecompany.addEventListener('click', function () {
+            companyDelete(id_company)
+            
+        })
 
     })
 
   
 }
         
+function companyDelete(id_company) {
+    let requestProject = {
+      method: "DELETE",
+      headers: myHeaders,
+    };
+    
+    const urlUsuarios = `http://localhost:3000/companies/${id_company}`;
+    fetch(urlUsuarios, requestProject)
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json);
+        if (json.message == "Compañia eliminado exitosamente") {
+          alert("Compañia eliminada exitosamente");
+          
+        } else alert("Error al eliminar la compañia, la misma esta en uso por otra seccion");
+      })
+      
+      .catch((error) => console.error("Error:", error));
+      
+  }

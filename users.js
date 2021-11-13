@@ -204,3 +204,20 @@ server.delete('/companies/:id_company', verifyJWT, async (req, res) => {
     }   
  
 })
+
+
+server.get('/cities', verifyJWT,async (req, res) => {
+    try {
+        const results = await myDataBase.query('SELECT * FROM cities', { type: myDataBase.QueryTypes.SELECT });
+        if(results){
+            res.status(200).json(results);
+            console.log(results);
+        }else{
+            throw new Error;
+        }
+    } catch (err) {
+        res.status(400).json({
+            message: `Error: ${err}`
+        })
+    }
+});

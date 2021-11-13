@@ -40,6 +40,8 @@ function showingCompanies (data) {
 
     let addButton = document.createElement('button')
     divtitle.appendChild(addButton)
+    addButton.setAttribute('id', "company")
+    addButton.addEventListener('click', newCompany) 
 
     let companieTable = document.createElement("table");
     companiesList.appendChild(companieTable);
@@ -134,3 +136,98 @@ function companyDelete(id_company) {
       .catch((error) => console.error("Error:", error));
       
   }
+  
+
+function CerrarCompany() {
+    document.body.removeChild(newDiv);
+};
+function newCompany() {
+  
+    newDiv = document.createElement("div");
+    newDiv.classList.add("new_div");
+    newDiv.innerHTML = ` 
+      <div class="bigger_gif">
+        <p>Nueva Compañia</p>
+      </div>
+      <div class="add_company">
+        <form>
+            <div>
+                <p>Nombre</p>
+                <input type="name" name="name" placeholder="" required />
+            </div>
+             <div>
+                <p>Direccion</p>
+                <input type="name" name="address" placeholder="" required />
+            </div>
+            <div>
+                <p>Email</p>
+                <input type="name" name="email" placeholder="" required />
+            </div>
+            <div>
+                <p>Numero detelefono</p>
+                <input type="name" name="phone" placeholder="" required />
+            </div>
+            <div>
+                <p>Ciudad</p>
+                <input type="name" name="id_city" placeholder="" required />
+            </div>
+        </form>
+      </div>
+      <div class="buttons_company">
+        <button class="cancel" onclick="CerrarCompany()">Cancelar</button>
+        <button class="save">Guardar compañia</button>
+      </div>
+      `;
+    document.body.appendChild(newDiv);
+};
+  
+var cities = [];
+
+
+function loadData() {
+    let url = "http://localhost:3000/cities"
+
+    let requestInfo = {
+        method: "GET",
+        headers: myHeaders,
+      };
+
+
+    fetch(url, requestInfo).then((res) => {
+    return res.json()
+    }).then((data) => {
+    //onLoadCallback(data)
+    loadCities(data)
+    console.log(data)
+    });
+}
+
+
+function loadCities() {
+    loadCities(data, storeCitiesLocally)
+}
+function storeCitiesLocally(data) {
+    cities = data.cities
+    dropCities(cities)
+}
+
+function dropCities(cities) {
+    let select = document.getElementById("citiesDropDown");
+    cities.forEach(cities => {
+    let option = document.createElement("option");
+    option.label = cities.name;
+    option.value = cities.name;
+    
+    select.appendChild(option);
+    });
+    
+    //we select the first record
+    select.selectedIndex = 0; 
+    
+    //we show the band
+    showSelectedBand();
+   }
+
+
+loadData();
+loadCities()

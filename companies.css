@@ -63,4 +63,111 @@ table .delete {
   display: inline-block;
   padding-left: 10px;
 }
+
+.new_div {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.8);
+  color: #000000;
+  z-index: 999;
+}
+
+.new_div .bigger_gif {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(40%, #1D72C2), color-stop(40%, white)) no-repeat;
+  background: linear-gradient(#1D72C2 40%, white 40%) no-repeat;
+  width: 1215px;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 150px;
+  margin-bottom: 100px;
+}
+
+.new_div .bigger_gif p {
+  color: white;
+  font-weight: bold;
+  font-size: 25px;
+  float: left;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+.new_div .add_company {
+  width: 1170px;
+  height: 130px;
+  background-color: white;
+  border: 3px solid #0683F9;
+  border-radius: 6.5px;
+  border-radius: 6.5px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -340px;
+}
+
+.new_div .add_company form {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.new_div .add_company form div {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.new_div .add_company form p {
+  font-size: 15px;
+  text-align: left;
+  padding-bottom: 3px;
+}
+
+.new_div .add_company form input[type="name"], .new_div .add_company form input[type="email"], .new_div .add_company form input[type="password"], .new_div .add_company form input[type="perfil"] {
+  height: 30px;
+  border: 1px solid #CCCCCC;
+}
+
+.new_div .buttons_company {
+  padding-top: 65px;
+  padding-left: 700px;
+}
+
+.new_div .buttons_company .save {
+  background-color: rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+  border-radius: 2px;
+  width: 170px;
+  height: 40px;
+  outline: none;
+  cursor: pointer;
+  border: 1px solid white;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.new_div .buttons_company .cancel {
+  outline: none;
+  cursor: pointer;
+  border: 1px solid white;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+  border-radius: 2px;
+  font-size: 15px;
+  font-weight: bold;
+  margin-right: 10px;
+  width: 170px;
+  height: 40px;
+}
 /*# sourceMappingURL=companies.css.map */

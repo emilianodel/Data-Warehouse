@@ -118,6 +118,36 @@ const ifEmailExist = async (req, res, next) => {
     }
 }
 
+const ifCompanyEmailExist = async (req, res, next) => {
+    const {email} = req.body
+
+    try {
+        const ifUserExist = await myDataBase.query('SELECT * FROM companies WHERE email =?', {
+            replacements: [email],
+            type: myDataBase.QueryTypes.SELECT
+        })
+        if(ifUserExist.length >= '1') {
+            res.status(406).json({
+                message: 'Compañia registrada'
+            })
+
+        } else {
+            next();
+        }
+    }catch (err) {
+        res.status(400).json ({
+            message: 'Error'
+        })
+    }
+}
+
+const validateCompanyData = async (req, res, next) => {
+    if (req.body.name && req.body.address && req.body.email && req.body.phone && req.body.id_city) {
+      next();
+    } else {
+      res.status(400).json({ message: "Todos los campos deben estar completos" });
+    }
+}
 
 
 server.post('/users/login', async (req, res) => {
@@ -140,7 +170,7 @@ server.post('/users/login', async (req, res) => {
             isAdmin: loginUser[0].isAdmin
         }
         console.log(infoUser)
-        token = jwt.sign(infoUser, jwtPassword,  {expiresIn: "4h"})
+        token = jwt.sign(infoUser, jwtPassword,  {expiresIn: "365d"})
         console.log(infoUser.isAdmin)
         res.status(200).json({message: "Login exitoso", "token": token, "isAdmin": loginUser[0].isAdmin })
         }
@@ -168,7 +198,7 @@ server.post('/users', ifEmailExist, validateUser, verifyisAdmin,async (req, res)
 
 server.get('/companies', verifyJWT, async (req, res) => {
     try {
-        const results = await myDataBase.query('SELECT companies.id_company, companies.name,companies.address,companies.email,companies.phone,cities.city_name FROM `companies` INNER JOIN cities ON companies.id_city = cities.id' , {type: myDataBase.QueryTypes.SELECT});
+        const results = await myDataBase.query('SELECT companies.id_company, companies.name,companies.address,companies.email,companies.phone, companies.id_city, cities.city_name FROM `companies` INNER JOIN cities ON companies.id_city = cities.id' , {type: myDataBase.QueryTypes.SELECT});
         if(results){
             res.status(200).json(results);
             console.log(results);
@@ -193,7 +223,7 @@ server.delete('/companies/:id_company', verifyJWT, async (req, res) => {
         })
        
         if(companies_id_delete) {
-            res.status(201).json({status: "Compañia eliminado exitosamente"});
+            res.status(201).json({message: "Compañia eliminada exitosamente"});
         } else {
             throw new Error
         }
@@ -221,3 +251,90 @@ server.get('/cities', verifyJWT,async (req, res) => {
         })
     }
 });
+
+
+server.post('/companies', verifyJWT, ifCompanyEmailExist, validateCompanyData, async (req, res) => {
+
+    const {name, address, email, phone, id_city} = req.body;
+
+    const companies =  await myDataBase.query('INSERT INTO companies (name, address, email, phone, id_city) VALUES (?, ?, ?, ?, ?)',
+        {
+        replacements: [name, address, email, phone, id_city],
+        type: myDataBase.QueryTypes.INSERT,
+        }
+    )
+    
+    companies.push(req.body);
+    res.status(201).json({message: "Compañia creada exitosamente"});
+    console.log(companies);
+})
+
+server.patch('/companies/:id_company', verifyJWT, validateCompanyData, async (req, res) => {
+
+    const {name, address, email, phone, id_city} = req.body;
+    const id_company = req.params.id_company
+
+    const company_update =  await myDataBase.query('UPDATE companies SET name =?, address = ?, email = ?, phone = ?, id_city = ? WHERE id_company = ?',
+        {
+        replacements: [name, address, email, phone, id_city,id_company],
+        type: myDataBase.QueryTypes.UPDATE,
+        }
+    )
+    
+    company_update.push(req.body);
+    res.status(201).json({message: "Compañia actualizada exitosamente"});
+    console.log(company_update);
+})
+
+
+server.patch('/companies/:id_company', verifyJWT, validateCompanyData, async (req, res) => {
+
+    const {name, address, email, phone, id_city} = req.body;
+    const id_company = req.params.id_company
+
+    const company_update =  await myDataBase.query('UPDATE companies SET name =?, address = ?, email = ?, phone = ?, id_city = ? WHERE id_company = ?',
+        {
+        replacements: [name, address, email, phone, id_city,id_company],
+        type: myDataBase.QueryTypes.UPDATE,
+        }
+    )
+
+    
+    company_update.push(req.body);
+    res.status(201).json({message: "Compañia actualizada exitosamente"});
+    console.log(company_update);
+})
+
+/*server.patch('/companies/:id_company',async (req, res) => {
+    const {name, address, email, phone, id_city} = req.body;
+    const id_company = req.params.id_company
+    try {
+      const companyExistente = await myDataBase.query("SELECT id_company FROM companies WHERE id_company=?", {
+        replacements: [id_company],
+        type: myDataBase.QueryTypes.SELECT,
+      });
+      if (companyExistente.length != 0) {
+        if (name && address && email && phone && id_city) {
+          try {
+            const data = await myDataBase.query(
+              "UPDATE companies SET name =?, address = ?, email = ?, phone = ?, id_city = ? WHERE id_company = ?",
+              {
+                replacements: [name, address, email, phone, id_city, id_company],
+                type: myDataBase.QueryTypes.UPDATE,
+              }
+            );
+            console.log(data);
+            res.status(200).json({ msj: "Compañia modificada exitosamente" });
+          } catch (err) {
+            console.log("error" + err);
+          }
+        } else {
+          res.status(400).json({ msj: "Todos los campos deben estar completos" });
+        }
+      } else {
+        res.status(400).json({ msj: "Id compañia erroneo - No se encuentra en Base de Datos" });
+      }
+    } catch (err) {
+      console.log("error" + err);
+    }
+})*/

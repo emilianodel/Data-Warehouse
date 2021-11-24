@@ -287,7 +287,7 @@ server.patch('/companies/:id_company', verifyJWT, validateCompanyData, async (re
 })
 
 
-server.patch('/companies/:id_company', verifyJWT, validateCompanyData, async (req, res) => {
+/*server.patch('/companies/:id_company', verifyJWT, validateCompanyData, async (req, res) => {
 
     const {name, address, email, phone, id_city} = req.body;
     const id_company = req.params.id_company
@@ -303,38 +303,126 @@ server.patch('/companies/:id_company', verifyJWT, validateCompanyData, async (re
     company_update.push(req.body);
     res.status(201).json({message: "Compañia actualizada exitosamente"});
     console.log(company_update);
+})*/
+
+
+
+server.get('/contacts', verifyJWT,async (req, res) => {
+    try {
+        const results = await myDataBase.query('SELECT contacts.id_contact,contacts.first_name,contacts.last_name,contacts.position,contacts.email,contacts.id_company,companies.name AS nombre_compania,contacts.id_city,cities.city_name AS nombre_ciudad, countries.name_countries,countries.name_countries AS nombre_pais,regions.id,regions.name_region AS nombre_region,contacts.address,contacts.interest,contacts.phone,contacts.phone_preference,pre_pho.name AS preferencia_phone,contacts.whatsapp,contacts.whatsapp_preference,pre_wha.name AS preferencia_whatsapp,contacts.instagram,contacts.instagram_preference,pre_ins.name AS preferencia_instagram,contacts.facebook,contacts.facebook_preference,pre_fac.name AS preferencia_facebook,contacts.linkedin,contacts.linkedin_preference,pre_lin.name AS preferencia_linkedin FROM contacts INNER JOIN companies ON contacts.id_company=companies.id_company INNER JOIN preferences AS pre_pho ON contacts.phone_preference=pre_pho.id_preference INNER JOIN preferences AS pre_wha ON contacts.whatsapp_preference=pre_wha.id_preference INNER JOIN preferences AS pre_ins ON contacts.instagram_preference=pre_ins.id_preference INNER JOIN preferences AS pre_fac ON contacts.facebook_preference=pre_fac.id_preference INNER JOIN preferences AS pre_lin ON contacts.linkedin_preference=pre_lin.id_preference INNER JOIN cities ON contacts.id_city=cities.id INNER JOIN countries ON cities.country_id=countries.id INNER JOIN regions ON countries.region_id=regions.id', { type: myDataBase.QueryTypes.SELECT });
+        if(results){
+            res.status(200).json(results);
+            console.log(results);
+        }else{
+            throw new Error;
+        }
+    } catch (err) {
+        res.status(400).json({
+            message: `Error: ${err}`
+        })
+    }
+});
+
+server.post('/contacts', verifyJWT, async (req, res) => {
+        const {
+          first_name,
+          last_name,
+          position,
+          email,
+          id_company,
+          id_city,
+          address,
+          phone,
+          whatsapp,
+          instagram,
+          facebook,
+          linkedin,
+        } = req.body;
+        const interest = req.body.interest ? req.body.interest : 0;
+        const phone_preference = req.body.phone_preference ? req.body.phone_preference : 1;
+        const whatsapp_preference = req.body.whatsapp_preference ? req.body.whatsapp_preference : 1;
+        const instagram_preference = req.body.instagram_preference ? req.body.instagram_preference : 1;
+        const facebook_preference = req.body.facebook_preference ? req.body.facebook_preference : 1;
+        const linkedin_preference = req.body.linkedin_preference ? req.body.linkedin_preference : 1;
+        try {
+          const contactExistente = await myDataBase.query("SELECT email FROM contacts WHERE email=?", {
+            replacements: [email],
+            type: myDataBase.QueryTypes.SELECT,
+          });
+          if (contactExistente.length == 0) {
+            try {
+              const data = await myDataBase.query(
+                "INSERT INTO contacts (first_name,last_name,position,email,id_company,id_city,address,interest,phone,phone_preference,whatsapp,whatsapp_preference,instagram,instagram_preference,facebook,facebook_preference,linkedin,linkedin_preference) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                {
+                  replacements: [
+                    first_name,
+                    last_name,
+                    position,
+                    email,
+                    id_company,
+                    id_city,
+                    address,
+                    interest,
+                    phone,
+                    phone_preference,
+                    whatsapp,
+                    whatsapp_preference,
+                    instagram,
+                    instagram_preference,
+                    facebook,
+                    facebook_preference,
+                    linkedin,
+                    linkedin_preference,
+                    
+                  ],
+                  type: myDataBase.QueryTypes.INSERT,
+                }
+              );
+              res.status(201).json({ msj: "Contacto creado exitosamente" });
+            } catch (err) {
+              console.log("error" + err);
+            }
+          } else {
+            res.status(400).json({ msj: "Contacto existente - Correo registrado" });
+          }
+        } catch (err) {
+          console.log("error" + err);
+        }
+    
 })
 
-/*server.patch('/companies/:id_company',async (req, res) => {
-    const {name, address, email, phone, id_city} = req.body;
-    const id_company = req.params.id_company
+server.get('/countries', verifyJWT,async (req, res) => {
     try {
-      const companyExistente = await myDataBase.query("SELECT id_company FROM companies WHERE id_company=?", {
-        replacements: [id_company],
-        type: myDataBase.QueryTypes.SELECT,
-      });
-      if (companyExistente.length != 0) {
-        if (name && address && email && phone && id_city) {
-          try {
-            const data = await myDataBase.query(
-              "UPDATE companies SET name =?, address = ?, email = ?, phone = ?, id_city = ? WHERE id_company = ?",
-              {
-                replacements: [name, address, email, phone, id_city, id_company],
-                type: myDataBase.QueryTypes.UPDATE,
-              }
-            );
-            console.log(data);
-            res.status(200).json({ msj: "Compañia modificada exitosamente" });
-          } catch (err) {
-            console.log("error" + err);
-          }
-        } else {
-          res.status(400).json({ msj: "Todos los campos deben estar completos" });
+        const results = await myDataBase.query('SELECT * FROM countries', { type: myDataBase.QueryTypes.SELECT });
+        if(results){
+            res.status(200).json(results);
+            console.log(results);
+        }else{
+            throw new Error;
         }
-      } else {
-        res.status(400).json({ msj: "Id compañia erroneo - No se encuentra en Base de Datos" });
-      }
     } catch (err) {
-      console.log("error" + err);
+        res.status(400).json({
+            message: `Error: ${err}`
+        })
     }
-})*/
+});
+
+
+server.get('/regions', verifyJWT,async (req, res) => {
+    try {
+        const results = await myDataBase.query('SELECT * FROM regions', { type: myDataBase.QueryTypes.SELECT });
+        if(results){
+            res.status(200).json(results);
+            console.log(results);
+        }else{
+            throw new Error;
+        }
+    } catch (err) {
+        res.status(400).json({
+            message: `Error: ${err}`
+        })
+    }
+});
+
+
+//INSERT INTO contacts (first_name,last_name,position,email,id_company,id_city,address,interest,phone,phone_preference,whatsapp,whatsapp_preference,instagram,instagram_preference,facebook,facebook_preference,linkedin,linkedin_preference) VALUES ('Emilia','Pepita','Gerente','correo@p.com',2,3,'Montevideo',50,'Montevideo 1234','789874',1,'78994',2,'@pepito',3,'pepita_1234',1,'pepita.linkedin');

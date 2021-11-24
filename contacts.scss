@@ -1,16 +1,30 @@
-main {
+@import "_colors.scss";
+
+*{
+    box-sizing: border-box;   
+    padding: 0;
+    margin: 0;     
+    text-decoration: none;
+    list-style: none;
+    font-family: $Sans;
+}
+
+
+
+main{
+    background-color: white;
     #bienvenida {
       h1 {
         display: block;
         text-align: center;
         margin-top: 40vh;
-        font-family: $montserrat;
+        font-family: $Sans;
         font-size: 45px;
         color: #2840a5;
       }
     }
     #contactos {
-      font-family: $montserrat;
+      font-family: $Sans;
       margin: 20px;
       h2 {
         font-size: 30px;
@@ -34,20 +48,31 @@ main {
             line-height: 50px;
             margin-left: auto;
             color: white;
-            background-color: seagreen;
-            border-radius: 10px;
+            background-color: #1D72C2;
+            border-radius: 2px;
+            border-radius: 2px;
           }
           input {
-            width: 300px;
-            height: 30px;
-            border-radius: 10px;
-            background-color: #e5e5e5;
-            border-color: darkgray;
+            width: 500px;
+            height: 40px;
+            border: 1px solid #CCCCCC;
+            border-radius: 3.5px;
+            border-radius: 3.5px;
           }
           span {
+            display: inline-block;
+            text-align: center;
+            padding-top: 7px;
             margin: 0px 15px;
             font-size: 23px;
             vertical-align: middle;
+            border: 1px solid rgba(0,0,0,0.25);
+            border-radius: 3.5px;
+            border-radius: 3.5px;
+            background-color: white;
+            color: #1D72C2;
+            width: 40px;
+            height: 40px;
           }
         }
         #arrayDelete {
@@ -61,19 +86,26 @@ main {
       }
       table {
         width: 100%;
+        border: 1px solid rgba(0,0,0,0.10);
         thead {
-          background-color: black;
-          color: white;
+          background-color: white;
+          color: black;
           font-size: 17px;
+          
           tr {
             height: 30px;
+       
             th {
               font-weight: 500;
+              color: #000000;
+              font-family: $Sans;
+              border-bottom: 1px solid rgba(0,0,0,0.10);
               span {
-                color: lightgray;
+                color:rgba(0,0,0,0.50);
                 padding: 0px 10px;
                 font-size: 20px;
               }
+             
             }
           }
         }
@@ -85,6 +117,10 @@ main {
             &.contactive {
               background-color: gainsboro;
             }
+            p {
+                color:rgba(0,0,0,0.50);
+                font-size: 14px;
+              }
             th {
               .editar {
                 background: #0462ba;
@@ -110,7 +146,7 @@ main {
           }
         }
       }
-      form {
+      /*form {
         #cont-up {
           display: flex;
           flex-flow: row wrap;
@@ -316,10 +352,10 @@ main {
           background-color: seagreen;
           border-radius: 10px;
         }
-      }
+      }*/
     }
     #usuarios {
-      font-family: $montserrat;
+      font-family: $Sans;
       margin: 20px;
       h2 {
         font-size: 30px;
@@ -434,7 +470,7 @@ main {
       }
     }
     #companias {
-      font-family: $montserrat;
+      font-family: $Sans;
       margin: 20px;
       h2 {
         font-size: 30px;
@@ -565,7 +601,7 @@ main {
       }
     }
     #zonas {
-      font-family: $montserrat;
+      font-family: $Sans;
       margin: 20px;
       h2 {
         font-size: 30px;
@@ -715,4 +751,287 @@ main {
         }
       }
     }
-  }
+}
+
+.second_div {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    //padding: 300px;
+    text-align: center;
+    background: rgba(0,0,0,0.80);
+    color: #000000;
+    z-index: 999; 
+    //padding-right: 1050px;
+
+    .title_div {
+        background: linear-gradient(#1D72C2 23%, white 20%) no-repeat;
+        width: 1215px;
+        height: 580px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 150px;
+        margin-bottom: 100px;
+        
+
+        h2 {
+            color: white;
+            font-weight: bold;
+            font-size: 25px;
+            float: left;
+            padding-left: 10px;
+            padding-top: 10px;
+           
+        }
+     
+    }
+    .info_div {
+        width: 1170px;
+        height: 130px;
+        background-color: white;
+        border: 3px solid #0683F9;
+        border-radius: 6.5px;
+        border-radius: 6.5px;
+        margin-left: auto;
+        margin-right: auto;
+        //position: absolute;
+        margin-top: -610px;
+        
+        form{
+            height: 100%;
+            //display: flex;
+            //flex-direction: row;
+            //justify-content: space-between;
+            //align-items: center;
+
+            #cont-up {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                height: 100%;
+            }
+
+            #cont-down {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+                grid-template-rows: 1fr 0.8fr 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr;
+                gap: 0px 0px;
+                grid-template-areas:
+                  "reg pai ciu dir int"
+                  "canal canal canal canal canal"
+                  "tel tel tel tel tel"
+                  "wha wha wha wha wha"
+                  "ins ins ins ins ins"
+                  "fac fac fac fac fac"
+                  "lin lin lin lin lin";
+                padding: 20px 30px;
+                background-color: white;
+                margin-top: 20px;
+
+                .reg {
+                    grid-area: reg;
+                    margin-right: 10px;
+                  }
+                  .pai {
+                    grid-area: pai;
+                    margin-right: 10px;
+                  }
+                  .ciu {
+                    grid-area: ciu;
+                    margin-right: 10px;
+                  }
+                  .dir {
+                    grid-area: dir;
+                    margin-right: 10px;
+                  }
+                  .int {
+                    grid-area: int;
+                  }
+                  .canal {
+                    grid-area: canal;
+                    margin-top: 20px;
+                  }
+                  .tel {
+                    grid-area: tel;
+                    margin-bottom: 20px;
+                  }
+                  .wha {
+                    grid-area: wha;
+                    margin-bottom: 20px;
+                  }
+                  .ins {
+                    grid-area: ins;
+                    margin-bottom: 20px;
+                  }
+                  .fac {
+                    grid-area: fac;
+                    margin-bottom: 20px;
+                  }
+                  .lin {
+                    grid-area: lin;
+                    margin-bottom: 20px;
+                  }
+                  li {
+                    display: flex;
+                    flex-flow: column nowrap;
+                    &.canal {
+                      display: grid;
+                      grid-template-columns: 180px 350px 170px 100px;
+                      grid-template-rows: 1fr;
+                      column-gap: 10px;
+                      label {
+                        align-self: flex-end;
+                        margin-bottom: 8px;
+                        font-size: 17px;
+                      }
+                    }
+                    &.tel {
+                      display: grid;
+                      grid-template-columns: 180px 350px 170px 100px;
+                      grid-template-rows: 20px;
+                      column-gap: 10px;
+                      input {
+                        width: 350px;
+                      }
+                      select {
+                        width: 170px;
+                      }
+                    }
+                    &.wha {
+                      display: grid;
+                      grid-template-columns: 180px 350px 170px 100px;
+                      grid-template-rows: 20px;
+                      column-gap: 10px;
+                      input {
+                        width: 350px;
+                      }
+                      select {
+                        width: 170px;
+                      }
+                    }
+                    &.ins {
+                      display: grid;
+                      grid-template-columns: 180px 350px 170px 100px;
+                      grid-template-rows: 20px;
+                      column-gap: 10px;
+                      input {
+                        width: 350px;
+                      }
+                      select {
+                        width: 170px;
+                      }
+                    }
+                    &.fac {
+                      display: grid;
+                      grid-template-columns: 180px 350px 170px 100px;
+                      grid-template-rows: 20px;
+                      column-gap: 10px;
+                      input {
+                        width: 350px;
+                      }
+                      select {
+                        width: 170px;
+                      }
+                    }
+                    &.lin {
+                      display: grid;
+                      grid-template-columns: 180px 350px 170px 100px;
+                      grid-template-rows: 20px;
+                      column-gap: 10px;
+                      input {
+                        width: 350px;
+                      }
+                      select {
+                        width: 170px;
+                      }
+                    }
+                    label {
+                      color: black;
+                      margin: 5px 0px;
+                    }
+                    input {
+                        &[type="text"], &[type="email"] {
+                            height: 30px;                         
+                            border: 1px solid #CCCCCC;
+                        } 
+                    }
+                    select {
+                        height: 30px;                         
+                        border: 1px solid #CCCCCC;
+                    }
+                    h4 {
+                      font-size: 10px;
+                      color: gray;
+                      font-weight: 500;
+                      margin-top: 3px;
+                      width: 250px;
+                    }
+                  }
+                
+                }
+
+
+            p{
+                font-size: 15px;
+                text-align: left;
+                padding-bottom: 3px;
+            }
+
+            input{
+                    &[type="text"], &[type="email"] {
+                        height: 30px;                         
+                        border: 1px solid #CCCCCC;
+                    } 
+            
+            } 
+
+            select {
+                height: 30px;                         
+                border: 1px solid #CCCCCC;
+            }
+        }
+       
+    }
+    .buttons_contact {
+        
+        padding-top: 320px;
+        padding-left: 900px;
+        display: flex;
+
+            #botonaccion {
+               
+                background-color: rgba(0,0,0,0.25);
+                border-radius: 2px;
+                border-radius: 2px;
+                width: 170px;
+                height: 40px;
+                outline: none;
+                cursor: pointer;
+                border: 1px solid white;
+                color: white;
+                font-size: 15px;
+                font-weight: bold;
+               
+               
+            }
+
+            #cancel_user {
+                outline: none;
+                cursor: pointer;
+                border: 1px solid white;
+                color: white;
+                background-color: rgba(0,0,0,0.25);
+                border-radius: 2px;
+                border-radius: 2px;
+                font-size: 15px;
+                font-weight: bold;
+                margin-right: 10px;
+                width: 170px;
+                height: 40px;
+               
+            }
+     }
+}

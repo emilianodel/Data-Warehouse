@@ -1,22 +1,25 @@
-let admin = localStorage.getItem("admin");
+let admin = localStorage.getItem("isAdmin");
 if (admin == 0) {
-  document.getElementById("nav-usuarios").style.display = "none";
+  document.getElementById('users').style.display = 'none';
 }
 
-document.getElementById("nav-contactos").addEventListener("click", cargarContactos);
+document.getElementById("contacts").addEventListener("click", cargarContactos);
 
 function cargarContactos() {
-  eliminarContenido();
+  //CerrarCompany();
   traerRegion();
   traerPais();
   traerCiudad();
   traerCompanias();
   traerContactos();
+  document.getElementById('companies').style.display = 'none'
+ 
 }
 
 //TRAER DATOS DE BD
+
 function traerContactos() {
-  const urlContactos = "http://localhost:3500/contacts";
+  const urlContactos = "http://localhost:3000/contacts";
   let requestOptions = {
     method: "GET",
     headers: myHeaders,
@@ -24,13 +27,13 @@ function traerContactos() {
   fetch(urlContactos, requestOptions)
     .then((res) => res.json())
     .then((json) => {
-      // console.log(json);
+     
       arrayContactos = [];
       for (x = 0; x < json.length; x++) {
         let contLimpio = {
           id_contact: json[x].id_contact,
-          fname: json[x].fname,
-          lname: json[x].lname,
+          fname: json[x].first_name,
+          lname: json[x].last_name,
           position: json[x].position,
           email: json[x].email,
           nombre_compania: json[x].nombre_compania,
@@ -39,29 +42,37 @@ function traerContactos() {
           nombre_region: json[x].nombre_region,
           address: json[x].address,
           interest: json[x].interest,
-          account_phone: json[x].account_phone,
-          preference_phone: json[x].preference_phone,
-          account_whatsapp: json[x].account_whatsapp,
-          preference_whatsapp: json[x].preference_whatsapp,
-          account_instagram: json[x].account_instagram,
-          preference_instagram: json[x].preference_instagram,
-          account_facebook: json[x].account_facebook,
-          preference_facebook: json[x].preference_facebook,
-          account_linkedin: json[x].account_linkedin,
-          preference_linkedin: json[x].preference_linkedin,
+          phone: json[x].phone,
+          phone_preference: json[x].phone_preference,
+          whatsapp: json[x].whatsapp,
+          whatsapp_preference: json[x].whatsapp_preference,
+          instagram: json[x].instagram,
+          instagram_preference: json[x].instagram_preference,
+          facebook: json[x].facebook,
+          preference_facebook: json[x].facebook_preference,
+          linkedin: json[x].linkedin,
+          linkedin_preference: json[x].linkedin_preference,
         };
+        
+       
         arrayContactos.push(contLimpio);
+        
       }
-      console.log(arrayContactos);
       cabeceraContactos(arrayContactos);
       cabeceraTablaContactos(arrayContactos);
       datosContactos(json);
+    
+      console.log(arrayContactos);
+      console.log(json)
+     
+      
+      
     })
     .catch((error) => console.error("Error:", error));
 }
 
 function traerCompanias() {
-  const urlCompanias = "http://localhost:3500/companies";
+  const urlCompanias = "http://localhost:3000/companies";
   let requestOptions = {
     method: "GET",
     headers: myHeaders,
@@ -84,7 +95,7 @@ function traerCompanias() {
 }
 
 function traerCiudad() {
-  const urlCiudades = "http://localhost:3500/cities";
+  const urlCiudades = "http://localhost:3000/cities";
   let requestOptions = {
     method: "GET",
     headers: myHeaders,
@@ -96,19 +107,19 @@ function traerCiudad() {
       arrayCities = [];
       for (x = 0; x < json.length; x++) {
         let contLimpio = {
-          id_city: json[x].id_city,
-          nombre_ciudad: json[x].name,
-          id_country: json[x].id_country,
+          id_city: json[x].id,
+          city_name: json[x].city_name,
+          country_id: json[x].country_id,
         };
         arrayCities.push(contLimpio);
       }
-      // console.log(arrayCities);
+      console.log(arrayCities);
     })
     .catch((error) => console.error("Error:", error));
 }
 
 function traerPais() {
-  const urlPais = "http://localhost:3500/countries";
+  const urlPais = "http://localhost:3000/countries";
   let requestOptions = {
     method: "GET",
     headers: myHeaders,
@@ -120,19 +131,19 @@ function traerPais() {
       arrayPaises = [];
       for (x = 0; x < json.length; x++) {
         let contLimpio = {
-          id_country: json[x].id_country,
-          nombre_pais: json[x].name,
-          id_region: json[x].id_region,
+          id_country: json[x].id,
+          nombre_pais: json[x].name_countries,
+          id_region: json[x].region_id,
         };
         arrayPaises.push(contLimpio);
       }
-      // console.log(arrayPaises);
+      console.log(arrayPaises);
     })
     .catch((error) => console.error("Error:", error));
 }
 
 function traerRegion() {
-  const urlRegiones = "http://localhost:3500/regions";
+  const urlRegiones = "http://localhost:3000/regions";
   let requestOptions = {
     method: "GET",
     headers: myHeaders,
@@ -144,14 +155,23 @@ function traerRegion() {
       arrayRegiones = [];
       for (x = 0; x < json.length; x++) {
         let contLimpio = {
-          id_region: json[x].id_region,
-          nombre_region: json[x].name,
+          id_region: json[x].id,
+          nombre_region: json[x].name_region,
         };
         arrayRegiones.push(contLimpio);
       }
-      // console.log(arrayRegiones);
+      console.log(arrayRegiones);
     })
     .catch((error) => console.error("Error:", error));
+}
+function datosTried(json) {
+  json.forEach(async info => { 
+    let address = info.address
+    let contactos = document.createElement("tr");
+    document.body.appendChild(contactos)
+    console.log(address)
+  })
+  
 }
 
 function datosContactos(json) {
@@ -159,6 +179,7 @@ function datosContactos(json) {
     let contactos = document.createElement("tr");
     document.getElementById("tcontenido").appendChild(contactos);
     contactos.setAttribute("id", "contacto" + json[i].id_contact);
+    
 
     let square = document.createElement("th");
     let check = document.createElement("i");
@@ -169,6 +190,7 @@ function datosContactos(json) {
     let cargo = document.createElement("th");
     let interes = document.createElement("th");
     let accion = document.createElement("th");
+    
     contactos.appendChild(square);
     square.appendChild(spanCheck);
     spanCheck.appendChild(check);
@@ -180,11 +202,12 @@ function datosContactos(json) {
     contactos.appendChild(accion);
     check.setAttribute("class", "far fa-square");
     check.setAttribute("id", "check" + json[i].id_contact);
-    contacto.innerHTML = json[i].fname + " " + json[i].lname;
-    paisRegion.innerHTML = json[i].nombre_pais + " - " + json[i].nombre_region;
+    contacto.innerHTML = json[i].first_name + " " + json[i].last_name + '<br>' + '<p>' + json[i].email + '</p>';
+    paisRegion.innerHTML = json[i].nombre_pais + '<br>' + '<p>' + json[i].nombre_region + '</p>' ;
     compania.innerHTML = json[i].nombre_compania;
     cargo.innerHTML = json[i].position;
     interes.innerHTML = json[i].interest+"%";
+   
 
     let id_contact = json[i].id_contact;
     arrayEliminar = [];
@@ -204,7 +227,7 @@ function datosContactos(json) {
         document.getElementById("check" + id_contact).setAttribute("class", "far fa-check-square");
         contactos.setAttribute("class","contactive");
       }
-      seleccionEliminar();
+      //seleccionEliminar();
     });
 
     let editar = document.createElement("h3");
@@ -220,7 +243,7 @@ function datosContactos(json) {
 
     // console.log(json[i]);
     let data = json[i];
-    // console.log(data);
+    console.log(data);
     editar.addEventListener("click", function () {
       modificarContacto(data, id_contact);
     });
@@ -229,6 +252,7 @@ function datosContactos(json) {
     });
   }
 }
+
 
 // CABECERA CONTACTOS
 function cabeceraContactos(arrayContactos) {
@@ -351,6 +375,8 @@ function cabeceraTablaContactos(arrayContactos) {
   tbody.setAttribute("id", "tcontenido");
 }
 
+
+
 function busqueda(arrayContactos) {
   // console.log(arrayContactos);
   let palabra = document.getElementById("inputsearch").value;
@@ -377,7 +403,7 @@ function busqueda(arrayContactos) {
 function newContact() {
   formularioContacto();
   let botonAccion = document.getElementById("botonaccion");
-  botonAccion.innerHTML = "Crear";
+  botonAccion.innerHTML = "Guardar contacto";
   botonAccion.addEventListener("click", function () {
     postContact();
   });
@@ -393,24 +419,24 @@ function postContact() {
   let preFac = document.getElementById("cfac").value;
   let preLin = document.getElementById("clin").value;
   let newContact = {
-    fname: cfname.value,
-    lname: clname.value,
+    first_name: cfname.value,
+    last_name: clname.value,
     position: cposition.value,
     email: cemail.value,
     id_company: companyContact,
     id_city: ciudadContact,
     address: cdireccion.value,
     interest: interesContact,
-    account_phone: ctelefono.value,
-    preference_phone: preTel,
-    account_whatsapp: cwhatsapp.value,
-    preference_whatsapp: preWha,
-    account_instagram: cinstagram.value,
-    preference_instagram: preIns,
-    account_facebook: cfacebook.value,
-    preference_facebook: preFac,
-    account_linkedin: clinkedin.value,
-    preference_linkedin: preLin,
+    phone: ctelefono.value,
+    phone_preference: preTel,
+    whatsapp: cwhatsapp.value,
+    whatsapp_preference: preWha,
+    instagram: cinstagram.value,
+    instagram_preference: preIns,
+    facebook: cfacebook.value,
+    facebook_preference: preFac,
+    linkedin: clinkedin.value,
+    linkedin_preference: preLin,
   };
 
   console.log(newContact);
@@ -421,7 +447,7 @@ function postContact() {
     body: JSON.stringify(newContact),
   };
 
-  const urlContactos = "http://localhost:3500/contacts";
+  const urlContactos = "http://localhost:3000/contacts";
   fetch(urlContactos, requestOptions)
     .then((res) => res.json())
     .then((json) => {
@@ -437,12 +463,29 @@ function postContact() {
 }
 
 function formularioContacto(data) {
-  eliminarContenido();
-  console.log(data);
+  //eliminarContenido();
+  
+  let div_formulario = document.createElement('div');
+  let div_formulario_two = document.createElement('div');
+  let div_formulario_three = document.createElement('div');
+  let div_formulario_four = document.createElement('div');
+  document.body.appendChild(div_formulario);
   let cabeContactos = document.createElement("h2");
-  document.getElementById("contactos").appendChild(cabeContactos);
-  cabeContactos.innerHTML = "CONTACTOS";
+  div_formulario.appendChild(div_formulario_two);
+  div_formulario.appendChild(div_formulario_three);
+  div_formulario.appendChild(div_formulario_four);
+  div_formulario_two.appendChild(cabeContactos);
 
+  div_formulario.setAttribute('class', 'second_div')
+  div_formulario_two.setAttribute('class', 'title_div')
+  div_formulario_three.setAttribute('class', 'info_div')
+  div_formulario_four.setAttribute('class', 'buttons_contact')
+  
+
+
+  cabeContactos.innerHTML = "NUEVO CONTACTO";
+  
+  
   let formulario = document.createElement("form");
   let ulPrincipal = document.createElement("ul");
   let li1 = document.createElement("li");
@@ -461,7 +504,7 @@ function formularioContacto(data) {
   let inputForm4 = document.createElement("input");
   let selectForm5 = document.createElement("select");
 
-  document.getElementById("contactos").appendChild(formulario);
+  div_formulario_three.appendChild(formulario);
   formulario.appendChild(ulPrincipal);
   ulPrincipal.appendChild(li1);
   ulPrincipal.appendChild(li2);
@@ -629,8 +672,8 @@ function formularioContacto(data) {
   lblForm05.innerHTML = "Interes:";
   // lblForm05.setAttribute("disabled", "disabled");
   lblForm06.innerHTML = "Canal de contacto";
-  lblForm07.innerHTML = "Dato de contacto";
-  lblForm08.innerHTML = "Preferencia";
+  lblForm07.innerHTML = "Cuenta de usuario";
+  lblForm08.innerHTML = "Preferencias";
   lblCanal06.setAttribute("for", "ctelefono");
   lblCanal06.innerHTML = "Telefono";
   lblCanal07.setAttribute("for", "cwhatsapp");
@@ -672,11 +715,7 @@ function formularioContacto(data) {
     opcionR.innerHTML = arrayRegiones[i].nombre_region;
     selectForm01.appendChild(opcionR);
     opcionR.setAttribute("value", arrayRegiones[i].id_region);
-    // if (data.id_contact) {
-    //   if (arrayRegiones[i].id_region == data.id_region) {
-    //     opcionR.setAttribute("selected", "selected");
-    //   }
-    // }
+    
   }
 
   let selectReg = document.getElementById("cregion");
@@ -722,9 +761,9 @@ function formularioContacto(data) {
       opcionCiu.innerHTML = "Seleccione una Ciudad...";
       selectForm03.appendChild(opcionCiu);
       for (i = 0; i < arrayCities.length; i++) {
-        if (arrayCities[i].id_country == optionPais) {
+        if (arrayCities[i].country_id == optionPais) {
           let opcionC = document.createElement("option");
-          opcionC.innerHTML = arrayCities[i].nombre_ciudad;
+          opcionC.innerHTML = arrayCities[i].city_name;
           selectForm03.appendChild(opcionC);
           opcionC.setAttribute("value", arrayCities[i].id_city);
           // if (data.id_contact) {
@@ -875,8 +914,8 @@ function formularioContacto(data) {
     cabeContactos.appendChild(aviso);
     aviso.innerHTML =
       "Solo se aplicaran cambios cuando exista iteraccion del usuario sobre el campo, de lo contrario se mantendra la misma informacion.";
-    inputForm1.setAttribute("value", data.fname);
-    inputForm2.setAttribute("value", data.lname);
+    inputForm1.setAttribute("value", data.first_name);
+    inputForm2.setAttribute("value", data.last_name);
     inputForm3.setAttribute("value", data.position);
     inputForm4.setAttribute("value", data.email);
     selectForm5.setAttribute("value", data.id_company);
@@ -885,15 +924,15 @@ function formularioContacto(data) {
     selectForm03.setAttribute("value", data.id_city);
     inputForm04.setAttribute("value", data.address);
     selectForm05.setAttribute("value", data.interest);
-    inputForm06.setAttribute("value", data.account_phone);
-    selectForm06.setAttribute("value", data.preference_phone);
-    inputForm07.setAttribute("value", data.account_whatsapp);
+    inputForm06.setAttribute("value", data.phone);
+    selectForm06.setAttribute("value", data.phone_preference);
+    inputForm07.setAttribute("value", data.whatsapp);
     selectForm07.setAttribute("value", data.preference_whatsapp);
-    inputForm08.setAttribute("value", data.account_instagram);
+    inputForm08.setAttribute("value", data.instagram);
     selectForm08.setAttribute("value", data.preference_instagram);
-    inputForm09.setAttribute("value", data.account_facebook);
+    inputForm09.setAttribute("value", data.facebook);
     selectForm09.setAttribute("value", data.preference_facebook);
-    inputForm010.setAttribute("value", data.account_linkedin);
+    inputForm010.setAttribute("value", data.linkedin);
     selectForm010.setAttribute("value", data.preference_linkedin);
 
     let dataAntCom = document.createElement("h4");
@@ -928,11 +967,23 @@ function formularioContacto(data) {
     dataAnteLin.innerHTML = "(Anterior: " + data.preferencia_linkedin + ")";
   }
 
-  var botonAccion = document.createElement("h2");
-  formulario.appendChild(botonAccion);
+  var botonAccion = document.createElement("button");
+  var cancel = document. createElement('button')
+  div_formulario_four.appendChild(cancel)
+  div_formulario_four.appendChild(botonAccion);
   botonAccion.setAttribute("id", "botonaccion");
+  cancel.setAttribute("id", "cancel_user");
   botonAccion.style.cursor="pointer";
+  cancel.style.cursor="pointer";
+  cancel.innerHTML = "Cancelar"
+  cancel.addEventListener('click', CerrarContact)
+
+  function CerrarContact() {
+    document.body.removeChild(div_formulario);
+  };
+  
 }
+
 
 function borrarDatos() {
   let borraDatos = document.getElementById("tcontenido");
@@ -1056,7 +1107,7 @@ function patchContact(id_contact) {
     body: JSON.stringify(editContact),
   };
 
-  const urlContactos = `http://localhost:3500/contacts/${id_contact}`;
+  const urlContactos = `http://localhost:3000/contacts/${id_contact}`;
   fetch(urlContactos, requestOptions)
     .then((res) => res.json())
     .then((json) => {
@@ -1077,7 +1128,7 @@ function deleteContact(id_contact) {
     headers: myHeaders,
   };
 
-  const urlContactos = `http://localhost:3500/contacts/${id_contact}`;
+  const urlContactos = `http://localhost:3000/contacts/${id_contact}`;
   fetch(urlContactos, requestOptions)
     .then((res) => res.json())
     .then((json) => {
@@ -1129,7 +1180,7 @@ function deleteContacts(id_contact) {
     headers: myHeaders,
   };
 
-  const urlContactos = `http://localhost:3500/contacts/${id_contact}`;
+  const urlContactos = `http://localhost:3000/contacts/${id_contact}`;
   fetch(urlContactos, requestOptions)
     .then((res) => res.json())
     .then((json) => {})

@@ -8,7 +8,7 @@ $grey:#cccccc;
 body {
 	font-family: $Sans;
 	font-size: 14px;
-	background: #f2f2f2;
+	background: white;
 }
 .clearfix {
 	&:after {
@@ -20,7 +20,7 @@ body {
 	}
 }
 .form_wrapper {
-	background: #fff;
+	background: #f2f2f2;
 	width: 400px;
 	max-width: 100%;
 	box-sizing: border-box;

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="companies.css">
     <link rel="stylesheet" href="contacts.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/e46deb082b.js" crossorigin="anonymous"></script>
     <title>Data Warehouse</title>
 </head>
 <body>
@@ -19,7 +20,7 @@
         <nav>
             <p class="logo">LOGO</p>
             <ul>
-                <li><a href="#">Contactos</a></li>
+                <li id="contacts"><a href="#">Contactos</a></li>
                 <li id="companias"><a href="#">Compañías</a></li>
                 <li id="users"><a href="#">Usuarios</a></li>
                 <li><a href="#">Región/Ciudad</a></li>
@@ -67,14 +68,11 @@
           </div>
         </div>
   </div>
-  <div id="companies" class="users-list"></div>
-  <!--The SELECT element.
-  <select id="sel" >
-    <option value="">-- Select --</option>
-  </select>-->
-
-
-
+  <main>
+    <div id="companies" class="users-list"></div>
+    <div id="contactos"></div>
+  </main>
+    
 </body>
 <script src="index.js"></script>
 <script src="createuser.js"></script>

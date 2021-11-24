@@ -214,19 +214,19 @@ function newCompany() {
       const data = await response.json()
       console.log(data[0].city_name)
       citiesList(data)
+    
      
      
   }
   
   
-  function citiesList (data) {
+function citiesList (data) {
     var ele = document.getElementById('sel');
     console.log(ele)
     for (var i = 0; i < data.length; i++) {
         // POPULATE SELECT ELEMENT WITH JSON.
         ele.innerHTML = ele.innerHTML +
             '<option value="' + data[i].id + '">' + data[i].city_name + '</option>';
-        
     }
   
   }

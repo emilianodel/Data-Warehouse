@@ -1,0 +1,201 @@
+#boxRegiones {
+    display: none;
+    width: 1366px;
+}
+
+
+#textRegiones{
+    text-align: center;
+    margin-top: 35px;
+}
+
+#boxAgregar_regiones{
+    margin-left: 81.3%;
+    margin-top: 3%;
+    border: 1px  solid #005eff;
+    width: 255px;
+    background-color: #005eff;
+    margin-bottom:10px;
+    
+}
+
+#agregarRegion{
+    font-size: 17px;
+    text-align: center;
+    background-color: #005eff;
+    color:white;
+    font-weight: 400;
+}
+
+.boxPais{
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.nombrePais{
+    width: 200px;
+    font-size: 22px;
+    font-weight: 350;
+}
+
+.nombreCiudad{
+    width: 200px;
+    font-size: 18x;
+    font-weight: 100;
+}
+
+.divRegion{
+    margin-left: 40px;
+}
+
+.boxCiudad{
+    margin-left: 40px;  
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.containerPais{
+    display: flex;
+    align-items: center;
+}
+
+.editarPais{
+    margin-left: 99px;
+    margin-right: 20px;
+    color: #005eff;
+}
+
+.eliminarPais{
+    color: red;
+    margin-right: 20px;
+    border-top: 1px  solid red;
+    border-bottom: 1px  solid red;
+}
+
+.editarCiudad{
+    margin-left: 59px;
+    margin-right: 20px;
+    color: #005eff;
+}
+
+.eliminarCiudad{
+    color: red;
+    border-top: 1px  solid red;
+    border-bottom: 1px  solid red;
+
+}
+
+.agregarCiudad{
+    font-size: 15px;
+    text-align: center;
+    background-color: #005eff;
+    color:white;
+    border: 1px  solid #005eff;
+    width: 110px;
+    margin-left: 810px;
+}
+
+.boxRegion{
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.editarRegion{
+    margin-left: 70px;
+    margin-right: 20px;
+    color: #005eff;
+}
+
+.eliminarRegion{
+    color: red;
+    margin-right: 20px;
+    border-top: 1px  solid red;
+    border-bottom: 1px  solid red;
+}
+
+.agregarPais{
+    font-size: 16px;
+    text-align: center;
+    background-color: #005eff;
+    color:white;
+    border: 1px  solid #005eff;
+    width: 120px;
+    margin-left: 59%;
+}
+
+.nombreRegion{
+    font-size: 25px;
+    font-weight: 700;
+    width: 300px;
+}
+
+.new_div_region {
+    position: fixed;
+    top: 0;
+    right: auto;
+    left:auto;
+    width: 100%;
+    height: 100%;
+    padding: 300px;
+    text-align: center;
+    background: rgba(0,0,0,0.80);
+    color: #000000;
+    z-index: 999;
+    
+}
+
+.bigger_gif {
+        background: linear-gradient(#1D72C2 40%, white 40%) no-repeat;
+        width: 100%px;
+        height: 300px;
+        margin-left: -500px;
+        margin-top: -300px;
+        margin-bottom: 100px;}
+
+.bigger_gif p{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+    
+.add_company_region {
+        width: 1170px;
+        height: 130px;
+        background-color: white;
+        border: 3px solid #0683F9;
+        border-radius: 6.5px;
+        border-radius: 6.5px;
+        margin-top: -340px;
+        margin-left: -70px;
+     }
+
+.add_company_region form div p{
+    font-size: 20px;
+}
+
+.buttons_company{
+   
+    .cancel_region, .changes {
+        background-color: rgba(0,0,0,0.25);
+        border-radius: 2px;
+        border-radius: 2px;
+        width: 170px;
+        height: 40px;
+        outline: none;
+        cursor: pointer;
+        border: 1px solid white;
+        color: white;
+        font-size: 15px;
+        font-weight: bold;
+    }
+       
+    
+
+}
+        
+#region{
+    font-weight: bold;
+    border-bottom: solid white 2px;
+  }      

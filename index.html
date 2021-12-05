@@ -6,10 +6,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="datawarehouse.css">
-    <link rel="stylesheet" href="usuarios.css">
-    <link rel="stylesheet" href="companies.css">
-    <link rel="stylesheet" href="contacts.css">
+    <link rel="stylesheet" href="/Styles/datawarehouse.css">
+    <link rel="stylesheet" href="/Styles/usuarios.css">
+    <link rel="stylesheet" href="/Styles/companies.css">
+    <link rel="stylesheet" href="/Styles/contacts.css">
+    <link rel="stylesheet" href="/Styles/regions.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/e46deb082b.js" crossorigin="anonymous"></script>
     <title>Data Warehouse</title>
@@ -23,7 +24,7 @@
                 <li id="contacts"><a href="#">Contactos</a></li>
                 <li id="companias"><a href="#">Compañías</a></li>
                 <li id="users"><a href="#">Usuarios</a></li>
-                <li><a href="#">Región/Ciudad</a></li>
+                <li id="regions"><a href="#">Región/Ciudad</a></li>
             </ul>
         </nav>
     </header>
@@ -46,7 +47,7 @@
                       <input type="password" name="repeatpass" placeholder="Repetir Contraseña" required />
                     </div>
                     <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
-                      <input type="perfil" id='admin' name="isAdmin" placeholder="¿Es administrador? Por favor responder" />                  
+                      <input type="perfil" id='admin' name="isAdmin" placeholder="¿Es administrador? Por favor responder: Si o No" />                  
                     </div>
                     <div class="row clearfix">
                       <div class="col_half">
@@ -63,20 +64,28 @@
                   </form>
                 </div>
                 <button class="CrearBtn">Crear</button>
+                <button class="cancel">Cancelar</button>
               </div>
             </div>
           </div>
         </div>
   </div>
-  <main>
+  <div id="users_info"></div>
+  <main id="main">
     <div id="companies" class="users-list"></div>
     <div id="contactos"></div>
   </main>
-    
+  <div id="boxRegiones">
+    <h1 id="textRegiones">Regiones</h1>
+    <div id="boxAgregar_regiones">
+        <h2 id="agregarRegion">Agregar nueva región</h2>
+    </div>
+</div>  
 </body>
-<script src="index.js"></script>
-<script src="createuser.js"></script>
-<script src="companies.js"></script>
-<script src="contacts.js"></script>
+<script src="/Frontend/index.js"></script>
+<script src="/Frontend/createuser.js"></script>
+<script src="/Frontend/companies.js"></script>
+<script src="/Frontend/contacts.js"></script>
+<script src="/Frontend/regions.js"></script>
 
 </html>

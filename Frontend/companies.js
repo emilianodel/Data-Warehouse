@@ -21,6 +21,11 @@ function cargarCompanias() {
 async function showCompanies() {
     companiesList.innerHTML = ''
 
+    document.getElementById('contactos').style.display ='none'
+    document.getElementById('companies').style.display ='inherit'
+    document.getElementById('users_info').style.display = 'none'
+    document.getElementById('boxRegiones').style.display = 'none'
+    
     let companies ={
         method: "GET",
         headers: myHeaders
@@ -280,7 +285,6 @@ function updateCompany(company_name, company_address, company_email, company_pho
   newDiv.classList.add("new_div");
   newDiv.innerHTML = ` 
     <div class="bigger_gif">
-      <p>Nueva Compañia</p>
     </div>
     <div class="add_company">
       <form class="new_company">

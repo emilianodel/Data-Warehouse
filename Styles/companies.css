@@ -67,8 +67,7 @@ table .delete {
 .new_div {
   position: fixed;
   top: 0;
-  right: 0;
-  width: 100%;
+  width: 1366px;
   height: 100%;
   text-align: center;
   background: rgba(0, 0, 0, 0.8);

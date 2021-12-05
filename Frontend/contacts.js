@@ -1,20 +1,28 @@
-let admin = localStorage.getItem("isAdmin");
-if (admin == 0) {
-  document.getElementById('users').style.display = 'none';
+
+function eliminarContenido() {
+  let borraContactos = document.getElementById("contactos");
+  while (borraContactos.firstChild) {
+    borraContactos.removeChild(borraContactos.firstChild);
+  } 
 }
 
 document.getElementById("contacts").addEventListener("click", cargarContactos);
 
 function cargarContactos() {
-  //CerrarCompany();
   traerRegion();
   traerPais();
   traerCiudad();
   traerCompanias();
   traerContactos();
+  eliminarContenido()
   document.getElementById('companies').style.display = 'none'
+  document.getElementById('contactos').style.display = 'inherit'
+  document.getElementById('users_info').style.display = 'none'
+  document.getElementById('boxRegiones').style.display = 'none'
  
 }
+
+
 
 //TRAER DATOS DE BD
 
@@ -32,8 +40,8 @@ function traerContactos() {
       for (x = 0; x < json.length; x++) {
         let contLimpio = {
           id_contact: json[x].id_contact,
-          fname: json[x].first_name,
-          lname: json[x].last_name,
+          first_name: json[x].first_name,
+          last_name: json[x].last_name,
           position: json[x].position,
           email: json[x].email,
           nombre_compania: json[x].nombre_compania,
@@ -180,7 +188,7 @@ function datosContactos(json) {
     document.getElementById("tcontenido").appendChild(contactos);
     contactos.setAttribute("id", "contacto" + json[i].id_contact);
     
-
+    let name = json[i].first_name
     let square = document.createElement("th");
     let check = document.createElement("i");
     let spanCheck = document.createElement("span");
@@ -202,7 +210,7 @@ function datosContactos(json) {
     contactos.appendChild(accion);
     check.setAttribute("class", "far fa-square");
     check.setAttribute("id", "check" + json[i].id_contact);
-    contacto.innerHTML = json[i].first_name + " " + json[i].last_name + '<br>' + '<p>' + json[i].email + '</p>';
+    contacto.innerHTML = `${name}` + " " + json[i].last_name + '<br>' + '<p>' + json[i].email + '</p>';
     paisRegion.innerHTML = json[i].nombre_pais + '<br>' + '<p>' + json[i].nombre_region + '</p>' ;
     compania.innerHTML = json[i].nombre_compania;
     cargo.innerHTML = json[i].position;
@@ -227,7 +235,7 @@ function datosContactos(json) {
         document.getElementById("check" + id_contact).setAttribute("class", "far fa-check-square");
         contactos.setAttribute("class","contactive");
       }
-      //seleccionEliminar();
+      seleccionEliminar();
     });
 
     let editar = document.createElement("h3");
@@ -382,8 +390,8 @@ function busqueda(arrayContactos) {
   let palabra = document.getElementById("inputsearch").value;
   let encontrado = arrayContactos.filter(
     (a) =>
-      a.fname.toLowerCase().includes(palabra.toLowerCase()) == true ||
-      a.lname.toLowerCase().includes(palabra.toLowerCase()) == true ||
+      a.first_name.toLowerCase().includes(palabra.toLowerCase()) == true ||
+      a.last_name.toLowerCase().includes(palabra.toLowerCase()) == true ||
       a.position.toLowerCase().includes(palabra.toLowerCase()) == true ||
       a.email.toLowerCase().includes(palabra.toLowerCase()) == true ||
       a.nombre_compania.toLowerCase().includes(palabra.toLowerCase()) == true ||
@@ -391,13 +399,16 @@ function busqueda(arrayContactos) {
       a.nombre_pais.toLowerCase().includes(palabra.toLowerCase()) == true ||
       a.nombre_region.toLowerCase().includes(palabra.toLowerCase()) == true ||
       a.interest == palabra
+   
   );
-  // console.log(encontrado);
+  
+  console.log(encontrado);
   let borraTabla = document.getElementById("tcontenido");
   while (borraTabla.firstChild) {
     borraTabla.removeChild(borraTabla.firstChild);
   }
   datosContactos(encontrado);
+  
 }
 
 function newContact() {
@@ -406,6 +417,7 @@ function newContact() {
   botonAccion.innerHTML = "Guardar contacto";
   botonAccion.addEventListener("click", function () {
     postContact();
+
   });
 }
 
@@ -455,6 +467,7 @@ function postContact() {
       if (json.msj == "Contacto creado exitosamente") {
         alert("Contacto creado exitosamente");
         cargarContactos();
+        CerrarContact(); 
       } else {
         alert("Error al generar el contacto, el mismo ya existe o faltan campos por completar");
       }
@@ -462,8 +475,13 @@ function postContact() {
     .catch((error) => console.error("Error:", error));
 }
 
+
+
+let second = document.querySelectorAll('.second_div')
+console.log(second)
+
 function formularioContacto(data) {
-  //eliminarContenido();
+ 
   
   let div_formulario = document.createElement('div');
   let div_formulario_two = document.createElement('div');
@@ -910,10 +928,9 @@ function formularioContacto(data) {
   });
 
   if (data) {
-    let aviso = document.createElement("h5");
-    cabeContactos.appendChild(aviso);
-    aviso.innerHTML =
-      "Solo se aplicaran cambios cuando exista iteraccion del usuario sobre el campo, de lo contrario se mantendra la misma informacion.";
+    cabeContactos.style.display = 'none'
+   
+  
     inputForm1.setAttribute("value", data.first_name);
     inputForm2.setAttribute("value", data.last_name);
     inputForm3.setAttribute("value", data.position);
@@ -978,12 +995,15 @@ function formularioContacto(data) {
   cancel.innerHTML = "Cancelar"
   cancel.addEventListener('click', CerrarContact)
 
-  function CerrarContact() {
-    document.body.removeChild(div_formulario);
-  };
+
+  
   
 }
 
+function CerrarContact() {
+  let second = document.querySelector('.second_div')
+  document.body.removeChild(second);
+};
 
 function borrarDatos() {
   let borraDatos = document.getElementById("tcontenido");
@@ -1079,24 +1099,24 @@ function patchContact(id_contact) {
   let preFac = document.getElementById("cfac").value;
   let preLin = document.getElementById("clin").value;
   let editContact = {
-    fname: cfname.value,
-    lname: clname.value,
+    first_name: cfname.value,
+    last_name: clname.value,
     position: cposition.value,
     email: cemail.value,
     id_company: companyContact,
     id_city: ciudadContact,
     address: cdireccion.value,
     interest: interesContact,
-    account_phone: ctelefono.value,
-    preference_phone: preTel,
-    account_whatsapp: cwhatsapp.value,
-    preference_whatsapp: preWha,
-    account_instagram: cinstagram.value,
-    preference_instagram: preIns,
-    account_facebook: cfacebook.value,
-    preference_facebook: preFac,
-    account_linkedin: clinkedin.value,
-    preference_linkedin: preLin,
+    phone: ctelefono.value,
+    phone_preference: preTel,
+    whatsapp: cwhatsapp.value,
+    whatsapp_preference: preWha,
+    instagram: cinstagram.value,
+    instagram_preference: preIns,
+    facebook: cfacebook.value,
+    facebook_preference: preFac,
+    linkedin: clinkedin.value,
+    linkedin_preference: preLin,
   };
 
   console.log(editContact);
@@ -1115,6 +1135,7 @@ function patchContact(id_contact) {
       if (json.msj == "Contacto modificado exitosamente") {
         alert("Contacto modificado exitosamente");
         cargarContactos();
+        CerrarContact();
       } else {
         alert("Error al modificar el contacto, el mismo ya existe o faltan campos por completar");
       }
@@ -1133,7 +1154,7 @@ function deleteContact(id_contact) {
     .then((res) => res.json())
     .then((json) => {
       console.log(json);
-      if (json.msj == "Contacto desactivado exitosamente") {
+      if (json.message == "Contacto eliminado exitosamente") {
         alert("Contacto eliminado exitosamente");
         cargarContactos();
       } else alert("Error al eliminar el contacto, el mismo no existe en nuestra base");
@@ -1148,15 +1169,17 @@ function seleccionEliminar() {
   }
   let selDelete = document.createElement("h5");
   cd.appendChild(selDelete);
-  selDelete.innerHTML = "seleccionados " + arrayEliminar.length;
+  selDelete.innerHTML = "Contactos seleccionados: " + arrayEliminar.length;
+  selDelete.setAttribute('class', "selectContacts")
 
   let multiDelete = document.createElement("h5");
   cd.appendChild(multiDelete);
   multiDelete.innerHTML = "Eliminar contactos seleccionados";
+  multiDelete.setAttribute('class', "deleteContacts")
 
   if (arrayEliminar.length === 0) {
-    selDelete.style.visibility = "hidden";
-    multiDelete.style.visibility = "hidden";
+    selDelete.style.display = "none";
+    multiDelete.style.display = "none";
   } else {
     selDelete.style.visibility = "initial";
     multiDelete.style.visibility = "initial";

@@ -24,6 +24,7 @@ main #bienvenida h1 {
 main #contactos {
   font-family: "Open Sans";
   margin: 20px;
+  width: 1345px;
   /*form {
         #cont-up {
           display: flex;
@@ -308,6 +309,33 @@ main #contactos #cabecera #arrayDelete {
   margin-top: 25px;
   margin-bottom: 5px;
   color: #f03738;
+}
+
+main #contactos #cabecera #arrayDelete .selectContacts {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  width: 300px;
+  line-height: 50px;
+  border: 1px solid white;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+  border-radius: 2px;
+}
+
+main #contactos #cabecera #arrayDelete .deleteContacts {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  width: 300px;
+  line-height: 50px;
+  border: 1px solid white;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+  border-radius: 2px;
+  cursor: pointer;
 }
 
 main #contactos table {
@@ -892,8 +920,7 @@ main #zonas form #botonaccion {
 .second_div {
   position: fixed;
   top: 0;
-  right: 0;
-  width: 100%;
+  width: 1366px;
   height: 100%;
   text-align: center;
   background: rgba(0, 0, 0, 0.8);
@@ -923,7 +950,7 @@ main #zonas form #botonaccion {
 
 .second_div .info_div {
   width: 1170px;
-  height: 130px;
+  height: 100px;
   background-color: white;
   border: 3px solid #0683F9;
   border-radius: 6.5px;
@@ -954,6 +981,15 @@ main #zonas form #botonaccion {
   height: 100%;
 }
 
+.second_div .info_div form #cont-up h4 {
+  font-size: 10px;
+  color: gray;
+  font-weight: 500;
+  margin-top: auto;
+  width: 250px;
+  position: absolute;
+}
+
 .second_div .info_div form #cont-down {
   display: -ms-grid;
   display: grid;
@@ -963,7 +999,6 @@ main #zonas form #botonaccion {
       grid-template-rows: 1fr 0.8fr 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr;
   gap: 0px 0px;
       grid-template-areas: "reg pai ciu dir int" "canal canal canal canal canal" "tel tel tel tel tel" "wha wha wha wha wha" "ins ins ins ins ins" "fac fac fac fac fac" "lin lin lin lin lin";
-  padding: 20px 30px;
   background-color: white;
   margin-top: 20px;
 }
@@ -973,6 +1008,7 @@ main #zonas form #botonaccion {
   -ms-grid-column: 1;
   grid-area: reg;
   margin-right: 10px;
+  width: 229px;
 }
 
 .second_div .info_div form #cont-down .pai {
@@ -980,6 +1016,7 @@ main #zonas form #botonaccion {
   -ms-grid-column: 2;
   grid-area: pai;
   margin-right: 10px;
+  width: 229px;
 }
 
 .second_div .info_div form #cont-down .ciu {
@@ -987,6 +1024,7 @@ main #zonas form #botonaccion {
   -ms-grid-column: 3;
   grid-area: ciu;
   margin-right: 10px;
+  width: 229px;
 }
 
 .second_div .info_div form #cont-down .dir {
@@ -994,12 +1032,15 @@ main #zonas form #botonaccion {
   -ms-grid-column: 4;
   grid-area: dir;
   margin-right: 10px;
+  width: 229px;
 }
 
 .second_div .info_div form #cont-down .int {
   -ms-grid-row: 1;
   -ms-grid-column: 5;
   grid-area: int;
+  margin-right: 10px;
+  width: 229px;
 }
 
 .second_div .info_div form #cont-down .canal {
@@ -1213,7 +1254,7 @@ main #zonas form #botonaccion {
 }
 
 .second_div .buttons_contact {
-  padding-top: 320px;
+  padding-top: 360px;
   padding-left: 900px;
   display: -webkit-box;
   display: -ms-flexbox;

@@ -2,7 +2,7 @@
 
 Este proyecto plantea la creación de una herramienta que permita a una compañía de Marketing administrar todos los contactos de sus clientes para sus campañias. Se basa en la creación de una pagina web que permite realizar operaciones CRUD para las secciones "Contactos", "Compañías", "Usuarios" y "Región/País".
 
-Bases de datos En el archivo "datawa_rehouse.sql" se encuentra la estructura de la base de datos del proyecto, con datos pre cargados necesarios para su uso.
+Bases de datos En el archivo "data_warehouse.sql" se encuentra la estructura de la base de datos del proyecto, con datos pre cargados necesarios para su uso.
 
 Servidor En el archivo "backend.js" esta configurado para conectarse en el puerto 3000.
 

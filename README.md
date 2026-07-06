@@ -1,12 +1,13 @@
 # Data-Warehouse
-Proyecto para administrar todos los contactos de sus clientes para sus campañias. Se basa en la creación de una pagina web que permite realizar operaciones CRUD para las secciones "Contactos", "Compañías", "Usuarios" y "Región/País".
 
-Bases de datos En el archivo "data_warehouse.sql" se encuentra la estructura de la base de datos del proyecto, con datos pre cargados necesarios para su uso.
+This project is for managing client contacts and companies. It involves a web application that supports CRUD operations for the "Contacts," "Companies," "Users," and "Region/Country" sections.
 
-Servidor En el archivo "backend.js" esta configurado para conectarse en el puerto 3000.
+Database: The project's database structure is defined in the "data_warehouse.sql" file, which includes the necessary pre-loaded data.
 
-Dependencias a instalar En el package.json estan especificadas las dependencias que deben ser instaladas para el correcto funcionamiento de la API
+Server: The "backend.js" file is configured to run on port 3000.
 
-*sequalize *express *jsonwebtoken *mysql2 *nodemon
+Dependencies: The dependencies required for the API to function correctly are specified in the "package.json" file:
 
-Por favor iniciar sesion en el HTML llamado "login.html" con un usuario pre cargado en la base de datos.
+*sequelize *express *jsonwebtoken *mysql2 *nodemon
+
+Please log in via the "login.html" page using a user account already present in the database.
